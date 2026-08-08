@@ -1,3 +1,6 @@
+
+# Create and initialize a Spark session
+
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder\
@@ -5,6 +8,8 @@ spark = SparkSession.builder\
                     .appName("SALES-ETL")\
                     .getOrCreate()
 
+
+# Extract raw CSV data into a Spark DataFrame
 
 def extract_data (data):
 

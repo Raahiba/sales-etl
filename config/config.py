@@ -1,4 +1,4 @@
-# Raw data
+# Raw data path
 ORDER_PAYMENT_PATH = "data/raw/olist_order_payments_dataset.csv"
 ORDER_REVIEW_PATH = "data/raw/olist_order_reviews_dataset.csv"
 ORDER_PATH = "data/raw/olist_orders_dataset.csv"
@@ -9,7 +9,7 @@ CUSTOMER_PATH = "data/raw/olist_customers_dataset.csv"
 LOCATION_PATH = "data/raw/olist_geolocation_dataset.csv"
 ORDER_ITEM = "data/raw/olist_order_items_dataset.csv"
 
-# Output
+# Outputpath
 REVIEW_OUTPUT_PATH = 'data/output/reviews'
 PAYMENT_OUTPUT_PATH = 'data/output/payments'
 ORDER_OUTPUT_PATH = 'data/output/orders'

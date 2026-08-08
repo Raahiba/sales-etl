@@ -1,6 +1,8 @@
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
+# Import raw data paths from the configuration file
+
 from config.config import (
     ORDER_ITEM,
     ORDER_PATH,
@@ -14,17 +16,17 @@ from config.config import (
 )
 
 
-# data cleaning 
-
+# Remove duplicate records from the DataFrame
 
 def data_cleaning(dataframe):
 
-    # Duplicates 
     print("Removing Duplicates")
     dataframe = dataframe.drop_duplicates()
     print("Duplicates removed")
 
     return dataframe
+
+# Count null values in each column
 
 # def null_count(dataframe):
 #      # Count nulls
@@ -38,11 +40,18 @@ def data_cleaning(dataframe):
 #     return null_count
 #     print("success")
 
+
+# Convert review date columns from String to Timestamp
+
 def data_cast(dataFrame):
    dataFrame =  dataFrame.withColumn("review_creation_date", col("review_creation_date").cast("timestamp"))\
                          .withColumn("review_answer_timestamp", col("review_answer_timestamp").cast("timestamp"))
    return dataFrame
 
+
+# Create new columns to calculate order processing time
+# and the number of days before the estimated delivery date
+# that the order was actually delivered
 
 def feature_engg(dataframe):
     dataframe = dataframe.withColumn(
@@ -53,9 +62,8 @@ def feature_engg(dataframe):
                                                    )
                                                 )
 
-# number of days earlier the order arrived
     dataframe = dataframe.withColumn(
-                                    "estimated_days_diffrence", \
+                                    "estimated_days_difference", \
                                             date_diff(
                                             "order_estimated_delivery_date", 
                                             "order_delivered_customer_date"
@@ -63,6 +71,9 @@ def feature_engg(dataframe):
                                      )
 
     return dataframe
+
+
+# Categorize payment values into low, medium, and high-value categories
 
 def payment_cat(dataframe):
     dataframe = dataframe.withColumn("payment_category",

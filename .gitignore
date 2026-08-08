@@ -427,3 +427,17 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Project-specific files
+
+# Raw dataset
+data/raw/
+
+#ETL output
+data/output/
+
+# Databricks
+.databricks/
+
+# Environment variables and secrets
+.env
